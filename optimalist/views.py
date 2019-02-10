@@ -12,11 +12,10 @@ import pyocr.builders
 
 def get_ocr(request):
     tool = pyocr.get_available_tools()[0]
-    lang = tool.get_available_languages()[0]
 
     txt = tool.image_to_string(
         Image.open('optimalist/static/fis.jpeg'),
-        lang=lang,
+        lang='eng',
         builder=pyocr.builders.TextBuilder()
     )
 
