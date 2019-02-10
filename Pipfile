@@ -18,6 +18,7 @@ gunicorn = "*"
 djangorestframework = "*"
 newrelic = "*"
 pyocr = "*"
+pillow = "*"
 
 [dev-packages]
 
