@@ -3,5 +3,7 @@ from django.urls import include, path
 from optimalist import views
 
 urlpatterns = [
-    path('get-ocr/', views.get_ocr)
+    path('train-model/', views.train_model),
+    path('get-prediction/', views.get_prediction),
+    path('evaluate-model/', views.evaluate_model)
 ]

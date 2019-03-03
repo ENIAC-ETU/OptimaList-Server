@@ -19,6 +19,11 @@ djangorestframework = "*"
 newrelic = "*"
 pyocr = "*"
 pillow = "*"
-
+google-cloud = "*"
+google-cloud-storage = "*"
+google-api-python-client = "*"
+Keras = "*"
+oauth2client = "*"
+tensorflow = "*"
 [dev-packages]
 
