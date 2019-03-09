@@ -140,7 +140,7 @@ def evaluate(x, y, model):
 
 
 def upload_model():
-    client = storage.Client.from_service_account_json('keras-model/OptimaList-e5ddab8f37e2.json')
+    client = storage.Client.from_service_account_json('keras-model/credentials.json')
     bucket = client.get_bucket('optimalist-keras-model')
     model_files = [
         'model.json',
@@ -154,7 +154,7 @@ def upload_model():
 
 def download_model():
     K.clear_session()
-    client = storage.Client.from_service_account_json('keras-model/OptimaList-e5ddab8f37e2.json')
+    client = storage.Client.from_service_account_json('keras-model/credentials.json')
     bucket = client.get_bucket('optimalist-keras-model')
     model_files = [
         'model.json',

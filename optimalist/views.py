@@ -8,6 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 def train_model(request=None):
     # TODO support for different types of intervals
+    load_credentials()
     products = list(Product.objects.filter(interval=0).values_list('day').order_by('day').distinct())
     with open('keras-model/data/train-products-interval-0.txt', 'w') as file:
         for i in range(0, len(products), 4):
@@ -33,6 +34,7 @@ def train_model(request=None):
 def get_prediction(request):
     # TODO support for different types of intervals
     if request.method == 'POST':
+        load_credentials()
         data = json.loads(request.body)
         print("Data: {0}".format(data))
         x_input_dict = {}
@@ -75,3 +77,22 @@ def evaluate_model(request):
     x_test, y_test = keras_model.get_data('keras-model/data/test-interval-0.txt', False)
     c = keras_model.evaluate(x_test, y_test, model)
     return JsonResponse(json.dumps(c.tolist()), safe=False)
+
+
+def load_credentials():
+    s = StorageCredentials.objects.first()
+    data = {
+        "type": s.type,
+        "project_id": s.project_id,
+        "private_key_id": s.private_key_id,
+        "private_key": s.private_key.replace('\\n', '\n'),
+        "client_email": s.client_email,
+        "client_id": s.client_id,
+        "auth_uri": s.auth_uri,
+        "token_uri": s.token_uri,
+        "auth_provider_x509_cert_url": s.auth_provider_x509_cert_url,
+        "client_x509_cert_url": s.client_x509_cert_url
+    }
+
+    with open('./keras-model/credentials.json', 'w') as file:
+        json.dump(data, file, indent=2)
