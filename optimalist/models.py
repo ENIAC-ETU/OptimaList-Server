@@ -7,6 +7,9 @@ class Product(models.Model):
     modified_date = models.DateTimeField(auto_now_add=True)
     interval = models.IntegerField(default=0)
 
+    def __str__(self):
+        return "Title: {0}, Day: {1}, Interval: {2}".format(self.title, str(self.day), str(self.interval))
+
 
 class StorageCredentials(models.Model):
     type = models.CharField(max_length=200)
