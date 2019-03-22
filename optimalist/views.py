@@ -42,7 +42,7 @@ def get_prediction(request):
         for title, day_list in data.items():
             day_list.sort(reverse=True)
             print("Title: {0}, Days: {1}".format(title, str(day_list)))
-            products = list(Product.objects.filter(title=title).values_list('day').order_by('-day'))
+            products = list(Product.objects.filter(title=title).values_list('day').distinct().order_by('-day'))
             x_input = []
             for day in day_list:
                 Product.objects.create(title=title, day=day, interval=0)
